@@ -6,6 +6,20 @@ body {
   color: #ffffff;
 }
 
+.taskbar {
+  background-color: #663399;
+  padding: 10px;
+}
+
+#taskbarButton {
+  background-color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;
