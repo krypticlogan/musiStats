@@ -36,9 +36,7 @@ def apple_auth():
 def soundcloud_auth():
     return
 
-##
-sp = spotify_auth()
-    
+##  
     #app
 app = Flask(__name__, template_folder='templateFiles',static_folder='static')
 
@@ -49,17 +47,29 @@ app.config['SESSION COOKIE NAME'] = 'cookie'
 def index():
     return render_template('login.html')
 
-@app.route('/newpage')
+@app.route('/main')
 def newpage():
     return 'redirect'
 
 @app.route('/user')#for signed-in users
 def user():
-    return render_template('index.html')
+    return render_template('user.html')
 
-@app.route('/sp')#for spotify sign-ups
+    #redirects and authentications
+@app.route('/sp', methods=['POST'])#for spotify sign-ups
 def spotifyUserLogin():
     sp = spotify_auth()
     return redirect(os.environ.get('SPOTIFY_AUTH_URL')+'response_type=code&client_id='+sp.client_id+'&scope='+sp.scope+'&redirect_uri='+sp.redirect_uri)
+
+@app.route('/sc')
+def scUserLogin():
+    sc = soundcloud_auth()
+    return 'redirect'
+
+@app.route('/am')
+def appleUserLogin():
+    am = apple_auth()
+    return 'redirect'
+
 
 app.run()
