@@ -6,33 +6,35 @@
 </head>
 <body>
 
-  <header>
-    <h1>musiStats</h1>
-  </header>
+    
+<div id="header"></div>
+
+ 
   
   <div class="container">
-    <h2>Login with your music account</h2>
+    <h2>Login with your music provider</h2>
     
     <div class="buttons">
       <form action="{{ url_for('spotifyUserLogin') }}" method="POST">
         <button type="submit" name="provider" value="spotify">
             Login with Spotify
-            <span class="button-icon" style="background-image: url('spotify-icon.png');"></span>
+            <span class="button-icon" style="background-image: url('static/sp.png');"></span>
           </button>
         </form>
-        <form action="{{ url_for('process_login') }}" method="POST">
+        <form action="{{ url_for('appleUserLogin') }}" method="POST">
           <button type="submit" name="provider" value="apple_music">
             Login with Apple Music
-            <span class="button-icon" style="background-image: url('apple-music-icon.png');"></span>
+            <span class="button-icon" style="background-image: url('static/am.png');"></span>
           </button>
         </form>
-        <form action="{{ url_for('process_login') }}" method="POST">
+        <form action="{{ url_for('scUserLogin') }}" method="POST">
           <button type="submit" name="provider" value="soundcloud">
             Login with SoundCloud
-            <span class="button-icon" style="background-image: url('soundcloud-icon.png');"></span>
+            <span class="button-icon" style="background-image: url('static/sc.png');"></span>
           </button>
       </form>
     </div>
   </div>
+  <script src="static/script.js"></script>
 </body>
 </html>

@@ -1,26 +1,16 @@
-
-    //user page
-document.getElementById("editButton").addEventListener("click", function() {
-    alert("Edit button clicked!");
-  });
-  
-document.getElementById("logoutButton").addEventListener("click", function() {
-    alert("Logout button clicked!");
-  });
-  
-document.getElementById("taskbarButton").addEventListener("click", function() {
-    alert("Taskbar button clicked!");
-  });
-
-  //login page
-document.getElementById("spotifyButton").addEventListener("click", function() {
-    alert("Login with Spotify button clicked!");
-  });
-  
-document.getElementById("appleMusicButton").addEventListener("click", function() {
-    alert("Login with Apple Music button clicked!");
-  });
-  
-document.getElementById("soundCloudButton").addEventListener("click", function() {
-    alert("Login with soundCloud button clicked!");
+fetch('header.html')
+  .then(response => {
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('Error: ' + response.status);
+    }
+  })
+  .then(data => {
+    const headerElement = document.createElement('div');
+    headerElement.innerHTML = data;
+    document.body.insertBefore(headerElement, document.body.firstChild);
+  })
+  .catch(error => {
+    console.error(error);
   });

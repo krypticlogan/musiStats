@@ -33,6 +33,10 @@ button {
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover {
@@ -41,15 +45,11 @@ button:hover {
 }
 
 .button-icon {
-  display: inline-block;
   width: 20px;
   height: 20px;
   background-size: cover;
   background-repeat: no-repeat;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
+  margin-left: 5px;
 }
 
 /* Media Queries */
@@ -63,10 +63,20 @@ button:hover {
     padding: 15px 30px;
     font-size: 18px;
   }
+
+  .button-icon {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (min-width: 1024px) {
   .container {
     max-width: 960px;
+  }
+
+  .button-icon {
+    width: 40px;
+    height: 40px;
   }
 }
