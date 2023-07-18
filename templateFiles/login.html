@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>musiStats - Login</title>
-  <link rel="stylesheet" type="text/css" href="static/styles.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
   <header>
     <h1>musiStats</h1>
   </header>
@@ -13,12 +14,25 @@
     <h2>Login with your music account</h2>
     
     <div class="buttons">
-      <button id="spotifyButton">Login with Spotify</button>
-      <button id="appleMusicButton">Login with Apple Music</button>
-      <button id="soundCloudButton">Login with soundCloudc</button>
+      <form action="{{ url_for('spotifyUserLogin') }}" method="POST">
+        <button type="submit" name="provider" value="spotify">
+            Login with Spotify
+            <span class="button-icon" style="background-image: url('spotify-icon.png');"></span>
+          </button>
+        </form>
+        <form action="{{ url_for('process_login') }}" method="POST">
+          <button type="submit" name="provider" value="apple_music">
+            Login with Apple Music
+            <span class="button-icon" style="background-image: url('apple-music-icon.png');"></span>
+          </button>
+        </form>
+        <form action="{{ url_for('process_login') }}" method="POST">
+          <button type="submit" name="provider" value="soundcloud">
+            Login with SoundCloud
+            <span class="button-icon" style="background-image: url('soundcloud-icon.png');"></span>
+          </button>
+      </form>
     </div>
   </div>
-
-  <script src="static/script.js"></script>
 </body>
 </html>
