@@ -54,9 +54,16 @@ button:hover {
 
 /* Media Queries */
 
-@media (min-width: 600px) {
+
+
+
+@media (max-width: 600px) {
   .container {
     padding: 40px;
+  }
+  
+  .buttons {
+    flex-direction: column;
   }
 
   button {
