@@ -6,7 +6,10 @@ from dotenv import load_dotenv
 import random as ran
 
 
-load = load_dotenv()
+def load(path=None, file=None):
+    load_dotenv(path, file)
+
+load()
 
 #apis
 SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
