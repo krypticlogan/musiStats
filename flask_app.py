@@ -41,8 +41,8 @@ def soundcloud_auth():
 
 ##  
     #app
-#app = Flask(__name__, template_folder='/home/loganj/musiStats/templateFiles',static_folder='static')
-app = Flask(__name__, template_folder='templateFiles',static_folder='static')
+app = Flask(__name__, template_folder='/home/loganj/musiStats/templateFiles',static_folder='static')
+#app = Flask(__name__, template_folder='templateFiles',static_folder='static')
 app.secret_key = generate_key()
 app.config['SESSION COOKIE NAME'] = 'cookie'
 
@@ -75,4 +75,4 @@ def appleUserLogin():
     return 'redirect'
 
 
-app.run()
+#app.run()
