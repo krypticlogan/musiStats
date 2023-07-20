@@ -15,7 +15,7 @@ load()
 SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
 SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
 spotify_scope = "user-read-recently-played"+"%20"+"user-top-read"+"%20"+"user-library-read"+"%20"+"user-read-currently-playing"
-# redirect_uri='http://127.0.0.1:5000/stats'
+#redirect_uri='http://127.0.0.1:5000/stats/'
 redirect_uri='https://www.musistats.net/stats'
 ##spotify auth
 def spotify_auth():
@@ -41,8 +41,8 @@ def soundcloud_auth():
 
 ##  
     #app
-app = Flask(__name__, template_folder='/home/loganj/musiStats/templateFiles',static_folder='static')
-#app = Flask(__name__, template_folder='templateFiles',static_folder='static')
+#app = Flask(__name__, template_folder='/home/loganj/musiStats/templateFiles',static_folder='static')
+app = Flask(__name__, template_folder='templateFiles',static_folder='static')
 app.secret_key = generate_key()
 app.config['SESSION COOKIE NAME'] = 'cookie'
 
