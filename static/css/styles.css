@@ -7,20 +7,28 @@ body {
 }
 
 .container {
-  max-width: 100%;
-  margin: 20px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
   padding: 20px;
   background-color: #333;
   border-radius: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 60vh; /* Minimum height to extend near the bottom */
 }
 
-/* Updated styles for the header */
 header {
   text-align: center;
-  background-color: #c69ff0; /* Non-neutral pastel color for the header */
-  padding: 25px; /* Add some padding to the header */
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for the header */
+  background-color: #c69ff0;
+  padding: 25px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
@@ -43,13 +51,14 @@ nav a {
 }
 
 .buttons {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
 button {
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   background-color: #444;
   color: #fff;
   border: none;
@@ -76,6 +85,7 @@ button:hover {
 
 /* Media Queries */
 
+/* Styles for screens with a width of 600px and below (mobile devices) */
 @media (max-width: 600px) {
   nav ul {
     display: none;
@@ -84,16 +94,25 @@ button:hover {
   #taskbar-button {
     display: block;
   }
+
   .container {
+    /* Update container padding for mobile devices */
     padding: 40px;
+    /* Ensure the container occupies the full height of the viewport */
+    height: 100vh;
+    /* Enable scrolling within the container if necessary */
+    overflow-y: auto;
   }
-  
+
   .buttons {
-    flex-direction: column;
+    /* Align buttons to the bottom of the container on mobile devices */
+    width: 100%; /* Buttons occupy the full width on mobile */
+    justify-content: flex-start;
+    margin: 25px auto;
   }
 
   button {
-    padding: 15px 30px;
+    padding: 20px 35px;
     font-size: 18px;
   }
 
@@ -105,27 +124,18 @@ button:hover {
   .columns {
     display: block;
   }
-  
+
   .column {
     margin: 10px 0;
   }
 }
 
-@media (min-width: 1024px) {
-  .container {
-    max-width: 960px;
-  }
-
-  .button-icon {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (min-width: 601px) {
+/* Styles for screens with a width of 601px to 1023px (medium screens) */
+@media (min-width: 601px) and (max-width: 1023px) {
   #taskbar-button {
     display: none;
   }
+
   .columns {
     display: flex;
     justify-content: space-between;
@@ -138,5 +148,20 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     margin: 10px;
+  }
+}
+
+/* Styles for screens with a width of 1024px and above (desktop and larger screens) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+    /* Center the container horizontally on desktop screens */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .button-icon {
+    width: 40px;
+    height: 40px;
   }
 }

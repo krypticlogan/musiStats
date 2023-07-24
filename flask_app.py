@@ -15,8 +15,8 @@ load()
 SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
 SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
 spotify_scope = "user-read-recently-played"+"%20"+"user-top-read"+"%20"+"user-library-read"+"%20"+"user-read-currently-playing"
-#redirect_uri='http://127.0.0.1:5000/stats/'
-redirect_uri='https://www.musistats.net/stats'
+redirect_uri='http://127.0.0.1:5000/stats/'
+#redirect_uri='https://www.musistats.net/stats'
 ##spotify auth
 def spotify_auth():
     #redirect_uri=url_for('spotifyUserLogin',_external=True)
@@ -46,6 +46,7 @@ app = Flask(__name__, template_folder='templateFiles',static_folder='static')
 app.secret_key = generate_key()
 app.config['SESSION COOKIE NAME'] = 'cookie'
 
+
 @app.route('/')#home page
 def index():
     return render_template('login.html')
@@ -63,16 +64,17 @@ def user():
 def spotifyUserLogin():
     sp = spotify_auth()
     return redirect(os.environ.get('SPOTIFY_AUTH_URL')+'response_type=code&client_id='+sp.client_id+'&scope='+sp.scope+'&redirect_uri='+sp.redirect_uri)
+    #return sp.get_auth_response()
 
 @app.route('/sc')
 def scUserLogin():
-    sc = soundcloud_auth()
-    return 'redirect'
+    #sc = soundcloud_auth()
+    return render_template('oops.html')
 
 @app.route('/am')
 def appleUserLogin():
-    am = apple_auth()
-    return 'redirect'
+    #am = apple_auth()
+    return render_template('oops.html')
 
 
 #app.run()
