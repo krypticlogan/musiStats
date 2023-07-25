@@ -49,6 +49,10 @@ app.config['SESSION COOKIE NAME'] = 'cookie'
 
 @app.route('/')#home page
 def index():
+    return render_template('index.html')
+
+@app.route('/login')
+def login():
     return render_template('login.html')
 
 @app.route('/stats', methods=['GET'])

@@ -7,12 +7,7 @@ body {
 }
 
 .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
   padding: 20px; /* Default padding for other devices */
   background-color: #333;
   border-radius: 10px;
@@ -29,6 +24,7 @@ header {
   background-color: #c69ff0;
   padding: 25px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 
 nav ul {
@@ -96,6 +92,74 @@ button:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+header h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+header p {
+  font-size: 20px;
+}
+
+.about-container {
+  padding: 40px;
+  background-color: #a094fa;
+  border-radius: 10px;
+  margin: 40px 0;
+}
+
+.about-container h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 18px;
+}
+
+.user-container {
+  padding: 40px;
+  background-color: #a094fa;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.user-container h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.user-container p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.user-form a {
+  margin: 10px 0;
+  padding: 20px 40px;
+  font-size: 20px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-form a:hover {
+  background-color: #c69ff0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #c69ff0;
+  color: #fff;
+  font-size: 14px;
+  margin-top: auto;
+  width: 100%;
+}
+
 /* Media Queries */
 
 /* Styles for screens with a width of 600px and below (mobile devices) */
@@ -132,10 +196,14 @@ button:hover {
     width: 30px;
     height: 30px;
   }
+
+  .user-form a {
+    font-size: 6px;
+  }
 }
 
 /* Styles for screens with a width of 601px to 1023px (medium screens) */
-/* @media (min-width: 601px) and (max-width: 1023px) {
+@media (min-width: 601px) and (max-width: 1023px) {
   #taskbar-button {
     display: none;
   }
@@ -153,18 +221,16 @@ button:hover {
     border-radius: 10px;
     margin: 10px;
   }
-} */
+
+  .user-form a {
+    font-size: 12px;
+  }
+}
 
 /* Styles for screens with a width of 1024px and above (desktop and larger screens) */
 @media (min-width: 1024px) {
   #taskbar-button {
     display: none;
-  }
-  .container {
-    max-width: 960px;
-    /* Center the container horizontally on desktop screens */
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 
   .buttons {
@@ -176,7 +242,7 @@ button:hover {
     padding: 20px 35px;
     font-size: 18px;
   }
-  
+
   .button-icon {
     width: 40px;
     height: 40px;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>musiStats - Home</title>
+  <link rel="stylesheet" type=text/css href="/static/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  {% include 'header.html' %}
+
+  <!-- About Section -->
+  <section class="about-container">
+    <h2>About musiStats</h2>
+    <p>
+      musiStats is a music analytics web app that helps you gain insights into your listening patterns in new ways. Connect your favorite music provider to view your top artists, top tracks, and recently played songs. Analyze your music taste and discover new songs with musiStats. (in development, features mentioned may not be accessible yet)   </p>
+  </section>
+
+  <!-- Signup Window -->
+  <section class="user-container">
+    <h2>Get Started with musiStats</h2>
+    <p>Connect with your favorite music provider and explore your music data.</p>
+    <div class="user-form">
+        <a href="{{ url_for('login') }}">Connect</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 musiStats. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
