@@ -13,13 +13,13 @@ body {
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 600px;
-  padding: 20px;
+  padding: 20px; /* Default padding for other devices */
   background-color: #333;
   border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   min-height: 60vh; /* Minimum height to extend near the bottom */
 }
@@ -54,6 +54,7 @@ nav a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
 }
 
@@ -62,12 +63,14 @@ button {
   background-color: #444;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 20px 40px; /* Increase padding for larger buttons on mobile */
+  font-size: 30px; /* Increase font size for larger buttons on mobile */
   border-radius: 20px;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 100%; /* Buttons occupy the full width on mobile */
 }
 
 button:hover {
@@ -83,6 +86,16 @@ button:hover {
   margin-left: 5px;
 }
 
+.sorry-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 /* Media Queries */
 
 /* Styles for screens with a width of 600px and below (mobile devices) */
@@ -90,48 +103,39 @@ button:hover {
   nav ul {
     display: none;
   }
-
   #taskbar-button {
     display: block;
   }
-
   .container {
+    top: 25%;
     /* Update container padding for mobile devices */
     padding: 40px;
     /* Ensure the container occupies the full height of the viewport */
     height: 100vh;
     /* Enable scrolling within the container if necessary */
     overflow-y: auto;
+    background-color: #222;
   }
-
   .buttons {
-    /* Align buttons to the bottom of the container on mobile devices */
-    width: 100%; /* Buttons occupy the full width on mobile */
+    /* Align buttons to the top of the container on mobile devices */
     justify-content: flex-start;
-    margin: 25px auto;
+    /* Buttons occupy the full width of the container on mobile */
+    width: 100%;
   }
 
   button {
-    padding: 20px 35px;
-    font-size: 18px;
+    padding: 30px 60px; /* Increase padding for larger buttons on mobile */
+    font-size: 24px; /* Increase font size for larger buttons on mobile */
   }
 
   .button-icon {
     width: 30px;
     height: 30px;
   }
-
-  .columns {
-    display: block;
-  }
-
-  .column {
-    margin: 10px 0;
-  }
 }
 
 /* Styles for screens with a width of 601px to 1023px (medium screens) */
-@media (min-width: 601px) and (max-width: 1023px) {
+/* @media (min-width: 601px) and (max-width: 1023px) {
   #taskbar-button {
     display: none;
   }
@@ -149,10 +153,13 @@ button:hover {
     border-radius: 10px;
     margin: 10px;
   }
-}
+} */
 
 /* Styles for screens with a width of 1024px and above (desktop and larger screens) */
 @media (min-width: 1024px) {
+  #taskbar-button {
+    display: none;
+  }
   .container {
     max-width: 960px;
     /* Center the container horizontally on desktop screens */
@@ -160,6 +167,16 @@ button:hover {
     transform: translate(-50%, -50%);
   }
 
+  .buttons {
+    justify-content: flex-start;
+    margin: 25px auto;
+  }
+
+  button {
+    padding: 20px 35px;
+    font-size: 18px;
+  }
+  
   .button-icon {
     width: 40px;
     height: 40px;

@@ -77,4 +77,4 @@ def appleUserLogin():
     return render_template('oops.html')
 
 
-#app.run()
+app.run()
