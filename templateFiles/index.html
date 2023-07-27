@@ -7,6 +7,7 @@
   <link rel="stylesheet" type=text/css href="/static/css/styles.css">
 </head>
 <body>
+  {% include 'sidebar.html' %}
   <!-- Header -->
   {% include 'header.html' %}
 
@@ -30,6 +31,13 @@
   <footer>
     <p>&copy; 2023 musiStats. All rights reserved.</p>
   </footer>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>

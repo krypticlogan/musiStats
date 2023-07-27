@@ -1,3 +1,8 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -19,12 +24,40 @@ body {
   min-height: 60vh; /* Minimum height to extend near the bottom */
 }
 
+/* Header styles */
 header {
   text-align: center;
-  background-color: #c69ff0;
+  background-color: #4b5d9a;
   padding: 25px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   width: 100%;
+  justify-content: space-between;
+}
+
+header nav{
+  display: inline-block;
+}
+
+
+header h1 {
+  font-size: 30px;
+  margin: 10px;
+  margin-bottom: 15px;
+  display:inline-block;
+}
+
+header p {
+  font-size: 20px;
+  margin: 10px 0
+}
+
+.sidebar-toggle-btn {
+  font-size: 12px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display:inline-block;
 }
 
 nav ul {
@@ -52,6 +85,7 @@ nav a {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  z-index: 1;
 }
 
 button {
@@ -59,14 +93,13 @@ button {
   background-color: #444;
   color: #fff;
   border: none;
-  padding: 20px 40px; /* Increase padding for larger buttons on mobile */
+  padding: 6px 12px; /* Increase padding for larger buttons on mobile */
   font-size: 30px; /* Increase font size for larger buttons on mobile */
   border-radius: 20px;
   position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 100%; /* Buttons occupy the full width on mobile */
+  justify-content: center; /* Buttons occupy the full width on mobile */
 }
 
 button:hover {
@@ -92,20 +125,13 @@ button:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-header h1 {
-  font-size: 36px;
-  margin-bottom: 15px;
-}
-
-header p {
-  font-size: 20px;
-}
 
 .about-container {
   padding: 40px;
   background-color: #a094fa;
   border-radius: 10px;
-  margin: 40px 0;
+  margin: 51px 0;
+  margin-top: 55px;
 }
 
 .about-container h2 {
@@ -121,7 +147,7 @@ header p {
   padding: 40px;
   background-color: #a094fa;
   border-radius: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 .user-container h2 {
@@ -153,33 +179,82 @@ header p {
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #c69ff0;
+  background-color: #4b5d9a;
   color: #fff;
   font-size: 14px;
   margin-top: auto;
   width: 100%;
 }
 
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hide the sidebar initially */
+  width: 250px;
+  height: 100vh;
+  background-color: #424242;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #9c69bb;
+}
+
+.sidebar.active {
+  left: 0; /* Show the sidebar when active */
+}
+
+
+
+
+
 /* Media Queries */
 
 /* Styles for screens with a width of 600px and below (mobile devices) */
 @media (max-width: 600px) {
+
+  header {
+    width: auto
+  }
   nav ul {
     display: none;
   }
-  #taskbar-button {
+  /* #taskbar-button {
     display: block;
-  }
+  } */
   .container {
-    top: 25%;
+    /* top: 25%; */
     /* Update container padding for mobile devices */
-    padding: 40px;
+    /* padding: 40px; */
     /* Ensure the container occupies the full height of the viewport */
-    height: 100vh;
+    height: 50%;
     /* Enable scrolling within the container if necessary */
-    overflow-y: auto;
+    /* overflow-y: auto; */
     background-color: #222;
+    font-size: 12px;
+    width: auto;
   }
+  
   .buttons {
     /* Align buttons to the top of the container on mobile devices */
     justify-content: flex-start;
@@ -188,8 +263,12 @@ footer {
   }
 
   button {
-    padding: 30px 60px; /* Increase padding for larger buttons on mobile */
-    font-size: 24px; /* Increase font size for larger buttons on mobile */
+    padding: 6px 14px; /* Increase padding for larger buttons on mobile */
+    font-size: 16px; /* Increase font size for larger buttons on mobile */
+  }
+
+  .sidebar-toggle-btn {
+    font-size: 18px;
   }
 
   .button-icon {
@@ -198,7 +277,7 @@ footer {
   }
 
   .user-form a {
-    font-size: 6px;
+    font-size: 12px;
   }
 }
 
@@ -208,18 +287,8 @@ footer {
     display: none;
   }
 
-  .columns {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .column {
-    flex: 1;
-    background-color: #444;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 10px;
+  .sidebar-toggle-btn {
+    display: none;
   }
 
   .user-form a {
@@ -230,6 +299,10 @@ footer {
 /* Styles for screens with a width of 1024px and above (desktop and larger screens) */
 @media (min-width: 1024px) {
   #taskbar-button {
+    display: none;
+  }
+
+  .sidebar-toggle-btn {
     display: none;
   }
 
