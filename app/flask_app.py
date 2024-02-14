@@ -2,31 +2,23 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, request, url_for, session, redirect, render_template
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import random as ran
 import json
-from flask_sqlalchemy import SQLAlchemy
-import sshtunnel
+from db import *
 from datetime import datetime
+import pytz
 code = None
 USERNAME = ''
+PROVIDER = ''
+curTime = datetime.now(pytz.utc)
+
 
 def load(path=None, file=None):
     load_dotenv(path, file)
 
-load()
+load_dotenv(dotenv_path=find_dotenv(), override=True)
 
-#apis
-SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
-SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
-spotify_scope = "user-read-recently-played"+"%20"+"user-top-read"+"%20"+"user-library-read"+"%20"+"user-read-currently-playing"
-#redirect_uri='http://127.0.0.1:5000/stats/'
-redirect_uri='https://www.musistats.net/stats'
-##spotify auth
-def spotify_auth():
-    #redirect_uri=url_for('spotifyUserLogin',_external=True)
-    sp = SpotifyOAuth(client_id =SPOTIFY_CLIENT_ID, client_secret = SPOTIFY_CLIENT_SECRET, redirect_uri=redirect_uri, scope = spotify_scope)
-    return sp
 
 def generate_key():
     key = ''
@@ -39,9 +31,10 @@ def generate_key():
 SPOTIPY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
 SPOTIPY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
 spotify_scope = "user-read-recently-played"+"%20"+"user-top-read"+"%20"+"user-library-read"+"%20"+"user-read-currently-playing"
-# redirect_uri='http://127.0.0.1:5000/stats'
+redirect_uri='http://127.0.0.1:8000/stats'
 state = generate_key()
-redirect_uri='https://www.musistats.net/stats'
+
+# redirect_uri='https://www.musistats.net/stats'
 ##spotify auth
 def spotify_auth():
     #redirect_uri=url_for('spotifyUserLogin',_external=True)
@@ -58,39 +51,10 @@ def apple_auth():
     ##soundcloud auth
 def soundcloud_auth():
     return
-##
 
-def generate_key():
-    key = ''
-    while (len(key) < 31):
-        n = ran.randint(0,100)
-        key = key + str(n)
-    return key
-
-    #app
-#app = Flask(__name__, template_folder='/home/loganj/musiStats/templateFiles',static_folder='static')
 app = Flask(__name__, template_folder='templateFiles',static_folder='static')
 app.secret_key = generate_key()
 app.config['SESSION COOKIE NAME'] = 'cookie'
-app.config['DEBUG'] = True
-
-SSH_PASSWORD = os.environ.get('SSH_PASSWORD')
-
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="loganj",
-    password="sqlroot",
-    hostname="loganj.mysql.pythonanywhere-services.com",
-    databasename="loganj$musiStats",
-)
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
-class users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200))
-    created = db.Column(db.Date, default = datetime.utcnow)
 
 
 @app.route('/')#home page
@@ -124,7 +88,7 @@ def stats():
      auth.get_access_token(code, as_dict=False)
      
 
-     return redirect("/tracks")
+     return redirect("/stats")
     
     
 
@@ -164,4 +128,5 @@ def appleUserLogin():
     return render_template('oops.html')
 
 
-# app.run()
+# app.run(host="127.0.0.1", port=8000)
+# print(curTime)
