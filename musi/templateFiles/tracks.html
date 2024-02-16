@@ -10,6 +10,11 @@
 
   <div class="container">
     <h3>{{username}}'s Tracks</h3>
+    <ul>
+      {% for song in topTracks %} 
+        <li>{{ song }}</li>
+      {% endfor %}
+    </ul>
   </div>
 
 

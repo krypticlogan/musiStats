@@ -2,6 +2,7 @@
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, text
 from sqlalchemy.orm import relationship, registry
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql import func
 
 mapper_registry = registry()
 
@@ -11,6 +12,9 @@ Base = mapper_registry.generate_base()
 
 metadata = Base.metadata
 
+
+# python -m flask --app musi db upgrade -- pushes changes to db
+# python -m flask --app musi db migrate -- loads changes to db
 
 class Genre(Base):
     __tablename__ = 'genre'
@@ -44,17 +48,22 @@ class User(Base):
     id = Column(Integer, primary_key=True, server_default=text("nextval('users_user_id_seq'::regclass)"))
     username = Column(String(25))
     provider = Column(ForeignKey('provider.id'))
-    created_at = Column(DateTime, nullable=False) # ser default values
-    last_logged = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now()) # set default values
+    last_logged = Column(DateTime, nullable=False, server_default=func.now())
     provider_key = Column(String(50))
+    musi_user = Column(String(20), nullable = False)
+    refresh_tok = Column(String)
+    access_tok = Column(String)
 
     provider1 = relationship('Provider')
 
-    def __init__(name, provider):
-        username = name
+    def __init__(self, name, created_at, last_logged):
+       self.musi_user = name
+       self.created_at = created_at
+       self.last_logged = last_logged
 
     def __repr__(self):
-        return f'ID: {self.id} Name: {self.username} Provider: {self.provider}'
+        return f'ID: {self.id} Name: {self.musi_user} Provider: {self.provider}'
         
 
 
@@ -137,3 +146,5 @@ t_savedTrack = Table(
     Column('id', ForeignKey('track.id'), primary_key=True, nullable=False),
     Column('user_id', ForeignKey('users.id'), primary_key=True, nullable=False)
 )
+
+

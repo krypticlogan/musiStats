@@ -23,13 +23,13 @@
             <span class="button-icon" style="background-image: url('static/images/sp.png');"></span>
           </button>
         </form>
-        <form action="{{ url_for('appleUserLogin') }}" method="POST">
+        <form action="{{ url_for('scUserLogin') }}" method="POST">
           <button type="submit" name="provider" class="apple_music">
             Login with Apple Music
             <span class="button-icon" style="background-image: url('static/images/am.png');"></span>
           </button>
         </form>
-        <form action="{{ url_for('scUserLogin') }}" method="POST">
+        <form action="{{ url_for('appleUserLogin') }}" method="POST">
           <button type="submit" name="provider" class="soundcloud">
             Login with SoundCloud
             <span class="button-icon" style="background-image: url('static/images/sc.png');"></span>

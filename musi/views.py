@@ -5,42 +5,51 @@ from spotipy.oauth2 import SpotifyOAuth
 from auth import *
 from db import *
 from models import *
+from functions import *
+
+import datetime
+
+global SIGNEDIN
+SIGNEDIN = False
+
+CURRENT_TIME = datetime.datetime.now().utcnow()
 ''' 
 TODO:
 
-1. add user on sign-up: get time created and last logged
-2. find user provider, update user.provider
+1. add user on sign-up: get time created and last logged : DONE
+2. find user provider, update user.provider : DONE
 
-3. prompt user for password after provider sign-in 
-    3.1 (add password to user) 
+ 
 
-4. push user to stats screen: 
-    4.1 get user top songs/tracks/albums
+4. push user to stats screen: DONE
+    4.1 get user top songs/tracks/albums DONE
 
     4.2 collect user data for database and commit
+
+
+5. format user tracks page, show top songs, artists, albums
+
+
+6. try to find playlists similar to user
+
+recommendations soon
+
+7. update db tables correctly with time
 
 FEATURES ?
 
 edit username,  Default: provider username
+
+Different pages for logged in and new users (home, user, stats pages) 
 
 '''
 PROVIDER = ''
 PROVIDER_ID = None
 @app.route('/')#home page
 def index():
-    session = Session()
-    mads = User('maddy')
-    with app.app_context():
-        try:
-            db.session.add(mads)
-            print(f'Added User {mads.username}')
-            try:
-                db.session.commit()
-                print("and comitted")
-            except Exception as e:
-                print(e)
-        except Exception as e:
-            print(e)
+    # addUser("logan", CURRENT_TIME)
+
+    print(CURRENT_TIME)
     # users = session.query(User).all()
     # print(users)
     print(app.config['SQLALCHEMY_DATABASE_URI'])
@@ -53,30 +62,54 @@ def login():
 
 @app.route('/stats', methods=['GET'])
 def stats():
-    auth = SpotifyOAuth(client_id =SPOTIPY_CLIENT_ID,client_secret = SPOTIPY_CLIENT_SECRET , redirect_uri=redirect_uri, scope = spotify_scope, state=state)
+    auth = Auth()
+    if SIGNEDIN:
+        if PROVIDER == 'spotify': # spotify users
+            auth = SpotifyOAuth(client_id =SPOTIPY_CLIENT_ID,client_secret = SPOTIPY_CLIENT_SECRET , redirect_uri=redirect_uri, scope = spotify_scope, state=state)
+            access_token = auth.get_cached_token()
+            sp = spotipy.Spotify(auth_manager=auth)
+            global code
+            code = None
 
+            if access_token: #checks for access token // allows entry
+                print("access by access token")
+                result = sp.current_user() #gets the current user
+                #parsing json data
+                USERNAME = (result['display_name'])
+                #show page
 
-    access_token = auth.get_cached_token()
-    sp = spotipy.Spotify(auth_manager=auth)
+                # dict_keys(['items', 'total', 'limit', 'offset', 'href', 'next', 'previous'])
+                # topSongs = []
+                # topSongsData = sp.current_user_top_tracks()['items']
+                # numSongs = sp.current_user_top_tracks()['total']
+                # # albums = spGetTopSongs(topSongs)
+                # for song in topSongsData:
+                #     print(song['name']+"\n")
+                #     name = song['name']
+                #     topSongs.append(name)
+                topSongs = spGetTopSongs()
+                ## gets top songs of current user and adds them to list object
+                # order : high to low
 
-    if access_token: #checks for access token
+                # print(numSongs)
+                print(topSongs)
 
-        result = sp.current_user() #gets the current user
+                return render_template('tracks.html', username=USERNAME, topTracks=topSongs)
+            else: #no access_token, get code and try again    
+                code = request.args.get('code')
 
-        #parsing json data
-        USERNAME = (result['display_name'])
-        
-    
-        return render_template('tracks.html', username=USERNAME)
-    
+                auth.get_access_token(code, as_dict=False)
+
+            print("redirecting")
+            return redirect("/stats")
+            
+        elif PROVIDER == 'sc':
+            pass
+        elif PROVIDER == 'apple':
+            pass
+
     else:
-     code = request.args.get('code')
-     auth.get_access_token(code, as_dict=False)
-     
-
-     return redirect("/stats")
-    
-    
+        return render_template('tracks.html', username="")
 
 @app.route('/user')#for signed-in users
 def user():
@@ -103,16 +136,22 @@ def spotifyUserLogin():
     sp = spotify_auth()
     global PROVIDER
     PROVIDER = 'spotify'
+    global SIGNEDIN
+    SIGNEDIN = True
     return redirect(app.config['SPOTIFY_AUTH_URL']+'response_type=code&client_id='+sp.client_id+'&scope='+sp.scope+'&redirect_uri='+sp.redirect_uri)
     #return sp.get_auth_response()
 
-@app.route('/sc')
+@app.route('/sc', methods=['POST'])
 def scUserLogin():
+    global PROVIDER
+    PROVIDER = 'sc'
     #sc = soundcloud_auth()
     return render_template('oops.html')
 
-@app.route('/am')
+@app.route('/am',  methods=['POST'])
 def appleUserLogin():
+    global PROVIDER
+    PROVIDER = 'apple'
     #am = apple_auth()
     return render_template('oops.html')
 

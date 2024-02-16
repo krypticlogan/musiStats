@@ -1,7 +1,7 @@
 from musi import app
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(port=8000, debug=True)
 
 # run from cmd line
 # python -m flask run --port 8000
