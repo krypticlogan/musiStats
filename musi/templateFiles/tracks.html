@@ -8,15 +8,54 @@
   {% include 'sidebar.html' %}
   {% include 'header.html' %}
 
-  <div class="container">
+  <!-- <div class="container">
     <h3>{{username}}'s Tracks</h3>
     <ul>
-      {% for song in topTracks %} 
-        <li>{{ song }}</li>
+      {% for album in albums %} 
+      <img id="albumImage" src="{{ album['image'] }}" alt="Album Image">
+      <li>{{ album['track'] }}</li>
       {% endfor %}
     </ul>
-  </div>
+  </div> -->
+<!-- 
+  <div class="container">
+    <h3>{{username}}'s Tracks</h3>
+    <div class="grid-container">
+        <div class="grid-item">
+            <ul>
+                {% for album in albums %} 
+                <li>
+                    <div class="album-info">
+                        <img class="album-image" src="{{ album['image'] }}" alt="Album Image">
+                        <span>{{ album['track'] }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div> -->
 
+<div class="container">
+  <h3>{{username}}'s Tracks</h3>
+  <div class="grid-container">
+      <div class="grid-item">
+          <div class="column-wrapper">
+              <ul>
+                  {% for album in albums %} 
+                  <li>
+                      <div class="album-info">
+                          <img class="album-image" src="{{ album['image'] }}" alt="Album Image">
+                          <span>{{ album['track'] }}</span>
+                      </div>
+                  </li>
+                  {% endfor %}
+              </ul>
+          </div>
+      </div>
+      <!-- Add other grid items here for the other two columns -->
+  </div>
+</div>
 
   <script src="/static/js/script.js"></script>
 

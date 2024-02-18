@@ -79,22 +79,17 @@ def stats():
                 #show page
 
                 # dict_keys(['items', 'total', 'limit', 'offset', 'href', 'next', 'previous'])
-                # topSongs = []
-                # topSongsData = sp.current_user_top_tracks()['items']
-                # numSongs = sp.current_user_top_tracks()['total']
-                # # albums = spGetTopSongs(topSongs)
-                # for song in topSongsData:
-                #     print(song['name']+"\n")
-                #     name = song['name']
-                #     topSongs.append(name)
-                topSongs = spGetTopSongs()
+        
+                topSongData = spTopSongsData()
+                topTracks, albums = spGetTopSongs(topSongData)
                 ## gets top songs of current user and adds them to list object
                 # order : high to low
 
                 # print(numSongs)
-                print(topSongs)
+                print("Tracks : " + str(topTracks))
+                print("Albums : "+ str(albums))
 
-                return render_template('tracks.html', username=USERNAME, topTracks=topSongs)
+                return render_template('tracks.html', username=USERNAME, topTracks=topTracks, albums=albums)
             else: #no access_token, get code and try again    
                 code = request.args.get('code')
 

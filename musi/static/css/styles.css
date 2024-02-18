@@ -79,6 +79,10 @@ nav a {
   background-color: #444;
 }
 
+ul {
+  list-style: none; /* Remove bullets */
+}
+
 .buttons {
   display: flex;
   flex-direction: column;
@@ -224,6 +228,64 @@ footer {
   left: 0; /* Show the sidebar when active */
 }
 
+/* css for tracks page, columns and borders */
+.container {
+  max-width: 1200px; /* Adjust container width as needed */
+  margin: 0 auto; /* Center container */
+  padding: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+  grid-gap: 20px; /* Adjust the gap between columns */
+}
+/* 
+.grid-item {
+  rest of grid elements
+} */
+
+/* columns */
+.column-wrapper {
+  background-color: #ffffff; /* Dark grey border */
+  padding: 10px; /* Add padding */
+  border-radius: 10px; /* Rounded corners */
+  height: 400px; /* Fixed height */
+  overflow-y: auto; /* Add vertical scroll when content overflows */
+}
+
+.column-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Style for custom scrollbar (optional) */
+.column-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+}
+
+.column-wrapper::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+.column-wrapper::-webkit-scrollbar-thumb {
+  background-color: #555; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+.album-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px; /* Increase font size */
+  color: #222;
+  margin-bottom: 10px; /* Add bottom margin for spacing */
+}
+
+.album-image {
+  width: 75px; /* Increase image width */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Adjust spacing between image and text */
+}
 
 
 
