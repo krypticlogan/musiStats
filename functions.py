@@ -15,64 +15,37 @@ def spGetTopSongs(data):
     albums = []
 
     for song in data:
+        # keys for songs dict_keys(['album', 'artists', 'available_markets', 'disc_number', 'duration_ms', 'explicit', 'external_ids', 'external_urls', 'href', 'id', 'is_local', 'name', 'popularity', 'preview_url', 'track_number', 'type', 'uri'])
         print("Song : " + song['name']+"\n")
         name = song['name']
         topSongs.append(name)
         album = spGetTrackInfo(song)
         albums.append(album)
-    # print(albums)
     return topSongs, albums
 
-def spGetTrackInfo(track):
+def spGetTrackInfo(track): # takes track data and returns info
     albumData = track['album']
-    # print("Album data keys : " + str(albumData.keys()))
     (url, height, width) = spGetAlbumPhoto(albumData)
 
     trackName = track['name']
     albumName = albumData['name']
 
-    # print("Album name : " + albumName)
-
-
-    # albumName = 
-
-    # albumImage = albumData['images'][2]
-    # imageURL = albumImage['url']
-    # imageHeight = albumImage['height']
-    # imageWidth = albumImage['width']
-
-    # print(type(albumImage))
-    # print(albumData.keys())
-    # print(albumImage)
-
-    album = {
+    info = {
         "track" : trackName,
-        "name" : albumName,
+        "album_name" : albumName,
         "image" : url
         # "lengthInSecs" : length,
         # ""
     }
-    return album
+    return info
 
 
-def spGetAlbumPhoto(album):
+def spGetAlbumPhoto(album): # takes album data and gets photo
     albumImage = album['images'][2]
+
     imageURL = albumImage['url']
     imageHeight = albumImage['height']
     imageWidth = albumImage['width']
 
-    # print(type(albumImage))
-    # print(albumData.keys())
-    # print("Album Image : " + str(albumImage))
     return imageURL, imageHeight, imageWidth
-    # keys for songs dict_keys(['album', 'artists', 'available_markets', 'disc_number', 'duration_ms', 'explicit', 'external_ids', 'external_urls', 'href', 'id', 'is_local', 'name', 'popularity', 'preview_url', 'track_number', 'type', 'uri'])
    
-    
-       #data is json returned by spotify
-    #    data[]
-    # return photo
-       
-    
-    # album = data['album']
-
-    # return album

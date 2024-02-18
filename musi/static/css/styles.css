@@ -14,7 +14,8 @@ body {
 .container {
   width: 100%;
   padding: 20px; /* Default padding for other devices */
-  background-color: #333;
+  background-color: #333; 
+  /* make sure to widen and fix */
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -247,7 +248,7 @@ footer {
 
 /* columns */
 .column-wrapper {
-  background-color: #ffffff; /* Dark grey border */
+  background-color: #a094fa; /* Dark grey border */
   padding: 10px; /* Add padding */
   border-radius: 10px; /* Rounded corners */
   height: 400px; /* Fixed height */
@@ -277,7 +278,7 @@ footer {
   display: flex;
   align-items: center;
   font-size: 16px; /* Increase font size */
-  color: #222;
+  color:white;
   margin-bottom: 10px; /* Add bottom margin for spacing */
 }
 

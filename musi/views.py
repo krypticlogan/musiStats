@@ -76,7 +76,6 @@ def stats():
                 result = sp.current_user() #gets the current user
                 #parsing json data
                 USERNAME = (result['display_name'])
-                #show page
 
                 # dict_keys(['items', 'total', 'limit', 'offset', 'href', 'next', 'previous'])
         
@@ -86,9 +85,10 @@ def stats():
                 # order : high to low
 
                 # print(numSongs)
-                print("Tracks : " + str(topTracks))
-                print("Albums : "+ str(albums))
-
+                # print("Tracks : " + str(topTracks))
+                # print("Albums : "+ str(albums))
+                
+                #show page
                 return render_template('tracks.html', username=USERNAME, topTracks=topTracks, albums=albums)
             else: #no access_token, get code and try again    
                 code = request.args.get('code')
