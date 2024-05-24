@@ -21,9 +21,10 @@
   <!-- Signup Window -->
   <section class="user-container">
     <h2>Get Started with musiStats</h2>
-    <p>Connect with your favorite music provider and explore your music data.</p>
+    <p>Connect with your favorite music provider and explore your music data, or Log In if you've been here before.</p>
     <div class="user-form">
-        <a href="{{ url_for('login') }}">Connect</a>
+        <a href="{{ url_for('signup') }}" class="login-btn">Connect</a>
+        <a href="{{ url_for('signin') }}" class="login-btn">Log In</a>
     </div>
   </section>
 

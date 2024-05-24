@@ -38,7 +38,7 @@ SPOTIPY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
 SPOTIPY_CLIENT_SECRET = app.config['SPOTIFY_CLIENT_SECRET']
 SPOTIPY_CLIENT_ID = app.config['SPOTIFY_CLIENT_ID']
 spotify_scope = "user-read-recently-played"+"%20"+"user-top-read"+"%20"+"user-library-read"+"%20"+"user-read-currently-playing"
-redirect_uri='http://127.0.0.1:8000/stats'
+redirect_uri='http://127.0.0.1:8000/stats' # change to callback function
 state = generate_key()
 
 

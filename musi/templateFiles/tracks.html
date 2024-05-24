@@ -45,14 +45,46 @@
                   {% for album in albums %} 
                   <li>
                       <div class="album-info">
+                        <label class="rank">{{ loop.index }}</label>
                           <img class="album-image" src="{{ album['image'] }}" alt="Album Image">
-                          <span>{{ album['track'] }}</span>
+                          <span> {{ album['track'] }}</span>
                       </div>
                   </li>
                   {% endfor %}
               </ul>
           </div>
       </div>
+
+      <div class="grid-item">
+        <div class="column-wrapper">
+            <ul>
+                {% for artist in topArtists %} 
+                <li>
+                    <div class="album-info">
+                      <label class="rank">{{ loop.index }}</label>
+                        <img class="album-image" src="{{ artist['image'] }}" alt="Album Image">
+                        <span>{{ artist['name'] }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- <div class="grid-item">
+      <div class="column-wrapper">
+          <ul>
+              {% for album in albums %} 
+              <li>
+                  <div class="album-info">
+                      <img class="album-image" src="{{ album['image'] }}" alt="Album Image">
+                      <span>{{ album['track'] }}</span>
+                  </div>
+              </li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div> -->
       <!-- Add other grid items here for the other two columns -->
   </div>
 </div>

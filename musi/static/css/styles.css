@@ -1,5 +1,6 @@
 html, body {
   max-width: 100%;
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -22,7 +23,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 60vh; /* Minimum height to extend near the bottom */
+  min-height: 100vh; /* Minimum height to extend near the bottom */
 }
 
 /* Header styles */
@@ -105,6 +106,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center; /* Buttons occupy the full width on mobile */
+  margin-left: 5px;
+  margin-right: 10px;
 }
 
 button:hover {
@@ -249,7 +252,7 @@ footer {
 /* columns */
 .column-wrapper {
   background-color: #a094fa; /* Dark grey border */
-  padding: 10px; /* Add padding */
+  padding: 5px; /* Add padding */
   border-radius: 10px; /* Rounded corners */
   height: 400px; /* Fixed height */
   overflow-y: auto; /* Add vertical scroll when content overflows */
@@ -284,8 +287,80 @@ footer {
 
 .album-image {
   width: 75px; /* Increase image width */
-  height: auto; /* Maintain aspect ratio */
+  height: 75px; /* Maintain aspect ratio */
   margin-right: 10px; /* Adjust spacing between image and text */
+}
+
+.rank {
+  text-align:left;
+  margin-right: 25px;
+  color: black;
+  text-shadow: #4b5d9a;;
+  font-size: 35px;
+  font-family: "Helvetica";
+  font-weight: 800;
+}
+
+/* sign-up fields */
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for form elements */
+.signup-form label {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.signup-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #c69ff0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-form button:hover {
+  background-color: #a978d5;
+}
+
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #fa6055; /* Red */
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
 }
 
 
@@ -316,6 +391,7 @@ footer {
     background-color: #222;
     font-size: 12px;
     width: auto;
+    
   }
   
   .buttons {

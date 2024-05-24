@@ -1,5 +1,5 @@
 # coding: utf-8
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, text
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, text, UniqueConstraint, Boolean
 from sqlalchemy.orm import relationship, registry
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
@@ -54,16 +54,43 @@ class User(Base):
     musi_user = Column(String(20), nullable = False)
     refresh_tok = Column(String)
     access_tok = Column(String)
+    email = Column(String, nullable=False, )
+    password_hash = Column(String, nullable=False)
+    authenticated = Column(Boolean, server_default=text("false"))
+    new = Column(Boolean, server_default=text("true"))
 
     provider1 = relationship('Provider')
+    __table_args__ = (UniqueConstraint("email", name="users_email_key"),)
 
-    def __init__(self, name, created_at, last_logged):
+    def __init__(self, name, email, password, created_at, last_logged):
        self.musi_user = name
        self.created_at = created_at
        self.last_logged = last_logged
+       self.email = email
+       self.password_hash = password
 
     def __repr__(self):
         return f'ID: {self.id} Name: {self.musi_user} Provider: {self.provider}'
+    
+
+    def is_active(self):
+        """True, as all users are active."""
+        return True
+
+    def get_id(self):
+        """Return the email address to satisfy Flask-Login's requirements."""
+        return self.id
+
+    def is_authenticated(self):
+        """Return True if the user is authenticated."""
+        return self.authenticated
+
+    def is_anonymous(self):
+        """False, as anonymous users aren't supported."""
+        return False
+    
+    def is_new(self):
+        return self.new
         
 
 
